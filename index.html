@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TerOS</title>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="teros.css">
 </head>
 <body>
 
+<div id="crt"></div>
+
 <div id="boot">
-  <div class="boot-inner">
-    <div class="mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2 C6 6 4 12 8 18 C10 21 14 22 18 20 C20 18 20 14 18 10 C16 6 14 4 12 2 Z"/>
-        <path d="M12 22 V18"/>
-      </svg>
-    </div>
-    <div class="name">TerOS</div>
-    <div class="loading"><span></span></div>
-  </div>
-</div>
+  <svg class="boot-mark" viewBox="0 0 80 80">
+    <path class="boot-outline" d="M40 10 C27 20 19 33 21 46 C23 60 35 68 45 68 C56 68 63 56 61 42 C59 28 50 18 40 10 Z"/>
+    <path class="boot-vein" d="M40 12 C39 30 43 50 45 66"/>
+    <path class="boot-branch" d="M33 34 C37 36 41 37 45 37"/>
+    <path class="boot-branch" d="M31 45 C35 47 41 48 47 47"/>
+    <path class="boot-branch" d="M33 56 C37 58 42 58 48 56"/>
+  </svg>
+  <div class="boot-word">TerOS</div>
+  <div class="boot-note">a small forest, opening</div>
+</div>  
 
 <div id="wallpaper"></div>
 
@@ -29,36 +29,39 @@
 </div>
 
 <div id="taskbar">
-  <button id="start-btn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 2 C6 6 4 12 8 18 C10 21 14 22 18 20 C20 18 20 14 18 10 C16 6 14 4 12 2 Z"/>
-      <path d="M12 22 V18"/>
-    </svg>
-    TerOS
-  </button>
+  <button id="start-btn"><span class="start-glyph">&#9670;</span> TerOS</button>
   <div id="tasks"></div>
   <div id="tray-clock">--:--</div>
 </div>
 
 <div id="start-menu"></div>
 
-<div class="modal-backdrop" id="about-modal">
+<div id="about-modal" class="modal-backdrop">
   <div class="modal">
-    <div class="logo">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 2 C6 6 4 12 8 18 C10 21 14 22 18 20 C20 18 20 14 18 10 C16 6 14 4 12 2 Z"/>
-        <path d="M12 22 V18"/>
-      </svg>
+    <div class="titlebar">
+      <span class="title">About TerOS</span>
+      <div class="controls"><button class="tbtn" id="about-close">X</button></div>
     </div>
-    <h2>TerOS</h2>
-    <div class="ver">VERSION 1.0 — FOREST</div>
-    <p>A modern retro-inspired nature desktop operating system, living entirely inside your browser. Named after the Greek concept of <em>other</em>.</p>
-    <button class="btn primary" id="about-close">Close</button>
+    <div class="modal-body">
+      <pre class="ascii-tree">      /\
+     /  \
+    /    \
+   /  /\  \
+  /__/  \__\</pre>
+      <p><b>TerOS</b> &mdash; version 1.0<br>
+      A simulated nature OS in your browser.<br>
+      Everything here is make-believe.</p>
+      <p class="dim">Named after the Greek for "other".</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="about-ok">OK</button>
+    </div>
   </div>
 </div>
 
 <div id="toast"></div>
 
-<script src="app.js"></script>
+<script src="teros-core.js"></script>
+<script src="teros-apps.js"></script>
 </body>
 </html>
