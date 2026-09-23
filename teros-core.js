@@ -1,12 +1,8 @@
-/* ============================================================
-   TerOS core — helpers, storage, wallpaper, WM, widgets, plants
-   ============================================================ */
 (function () {
   'use strict';
 
   var T = {};
 
-  /* ---------- helpers ---------- */
   var $  = T.$  = function (s, r) { return (r || document).querySelector(s); };
   var $$ = T.$$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
 
@@ -62,9 +58,6 @@
     toastT = setTimeout(function () { t.className = ''; }, 1800);
   };
 
-  /* ------------------------------------------------------------
-     ICONS — drawn by hand, thin strokes, slightly organic
-  ------------------------------------------------------------ */
   var ICONS = {
     calc: '<rect x="5" y="3.5" width="14" height="17" rx="1"/><path d="M8 7h8"/><path d="M8 11h.01M12 11h.01M16 11h.01"/><path d="M8 14h.01M12 14h.01M16 14h.01"/><path d="M8 17h.01M12 17h.01M16 17h.01"/>',
     term: '<path d="M3 4.5h18v15H3z"/><path d="M7 10l3 2.5L7 15"/><path d="M12.5 15h4.5"/>',
@@ -103,9 +96,6 @@
   };
   T.I = ICONS;
 
-  /* ------------------------------------------------------------
-     STORAGE
-  ------------------------------------------------------------ */
   var Store = T.Store = {
     KEY: 'teros.v1',
     data: null,
@@ -178,9 +168,6 @@
     }
   };
 
-  /* ------------------------------------------------------------
-     WALLPAPERS — layered hand-drawn forest scenes
-  ------------------------------------------------------------ */
   function rng(seed) {
     var s = seed >>> 0;
     return function () {
@@ -338,9 +325,6 @@
     if (wg) wg.style.display = s.widgets ? 'grid' : 'none';
   };
 
-  /* ------------------------------------------------------------
-     WINDOW MANAGER
-  ------------------------------------------------------------ */
   var WM = T.WM = {
     zTop: 100,
     wins: {},
@@ -598,7 +582,6 @@
     }
   };
 
-  /* ---------- snap preview ---------- */
   T.showSnap = function (side) {
     var p = $('#snap-preview');
     if (!p) { p = T.el('div', {id:'snap-preview'}); document.body.appendChild(p); }
@@ -612,7 +595,6 @@
     var p = $('#snap-preview'); if (p) p.classList.remove('on');
   };
 
-  /* ---------- context menu ---------- */
   T.ctxMenu = null;
   T.initCtx = function () {
     var m = T.el('div', {id:'context-menu'});
@@ -667,11 +649,7 @@
     m.style.top  = Math.min(y, window.innerHeight - 280) + 'px';
   };
 
-  /* ------------------------------------------------------------
-     PLANTS — real vector illustrations
-  ------------------------------------------------------------ */
 
-  /* shared leaf: two-bezier teardrop with center vein and two side veins */
   function leaf(cx, cy, len, wdt, angle, fill, veinColor, highlight) {
     var h = wdt / 2;
     var t = 'translate(' + cx.toFixed(2) + ' ' + cy.toFixed(2) + ') rotate(' + angle + ')';
@@ -687,7 +665,6 @@
     return '<g transform="' + t + '"><path d="' + body + '" fill="' + fill + '"/>' + veins + hl + '</g>';
   }
 
-  /* an elaborate flower: 6 petals, gradient center, stamens */
   function flower(cx, cy, r, opts) {
     opts = opts || {};
     var petalOuter = opts.outer || '#e8b0c8';
@@ -712,7 +689,6 @@
     return petals + center + stamens;
   }
 
-  /* dense foliage cluster — several leaves arranged naturally */
   function foliage(cx, cy, r, baseGrad, veinColor, hiColor) {
     var out = '';
     var angles = [-140, -80, -20, 30, 90, 150, -110, 60, 200, 110];
@@ -801,14 +777,13 @@
         svg += '<path d="M' + (cx + b.side * 0.5) + ' ' + b.y + ' Q' + (cx + b.side * b.len * 0.4) + ' ' + (b.y - 2) + ' ' + (cx + b.side * b.len * 0.7) + ' ' + (b.y - 4) + '" stroke="#3d2a1a" stroke-width="1.4" fill="none" stroke-linecap="round"/>';
         svg += leaf(cx + b.side * b.len * 0.7, b.y - 4, b.len, b.len * 0.55, b.side < 0 ? -165 : -15, b.grad, '#1e3422', '#b8dfa8');
       });
-      // top bud
+
       svg += '<ellipse cx="' + (cx - 1) + '" cy="' + (topY2 - 1) + '" rx="3" ry="2" fill="#7fa87f"/>';
 
     } else if (stage.key === 'mature') {
       var h3 = 96 + (growth - 75) * 1.6;
       var topY3 = groundY - h3;
       var trunkW = 6;
-      // trunk — tapered
       svg += '<path d="M' + (cx - trunkW/2 - 1.5) + ' ' + groundY + ' Q' + (cx - trunkW/2 - 2) + ' ' + (groundY - h3/2) + ' ' + (cx - 1.5) + ' ' + topY3 +
                ' L' + (cx + 1.5) + ' ' + topY3 + ' Q' + (cx + trunkW/2 + 2) + ' ' + (groundY - h3/2) + ' ' + (cx + trunkW/2 + 1.5) + ' ' + groundY + ' Z" fill="#3d2a1a"/>';
       svg += '<path d="M' + (cx - 1) + ' ' + (groundY - 6) + ' Q' + (cx - 2) + ' ' + (groundY - h3*0.5) + ' ' + (cx - 0.8) + ' ' + (topY3 + 4) + '" stroke="#8b6a44" stroke-width="1.1" fill="none" opacity="0.6"/>';
@@ -820,7 +795,6 @@
       svg += '<path d="M' + (cx - trunkW/2 - 1.5) + ' ' + groundY + ' Q' + (cx - trunkW - 2) + ' ' + (groundY - 2) + ' ' + (cx - trunkW/2 - 1) + ' ' + (groundY - 5) + '" stroke="#3d2a1a" stroke-width="2" fill="none" stroke-linecap="round"/>';
       svg += '<path d="M' + (cx + trunkW/2 + 1.5) + ' ' + groundY + ' Q' + (cx + trunkW + 2) + ' ' + (groundY - 2) + ' ' + (cx + trunkW/2 + 1) + ' ' + (groundY - 5) + '" stroke="#3d2a1a" stroke-width="2" fill="none" stroke-linecap="round"/>';
 
-      // branches with foliage clusters
       var fb = [
         {x: cx - 30, y: groundY - h3*0.46, r: 15},
         {x: cx + 30, y: groundY - h3*0.58, r: 15},
@@ -831,15 +805,12 @@
         {x: cx + 10, y: topY3 + 6,         r: 11}
       ];
       fb.forEach(function (f, i) {
-        // branch
         svg += '<path d="M' + (cx + (f.x > cx ? 1 : -1) * 1) + ' ' + (f.y + 4) + ' Q' + ((cx + f.x)/2) + ' ' + (f.y - 2) + ' ' + f.x + ' ' + f.y + '" stroke="#3d2a1a" stroke-width="' + (2 - i*0.15) + '" fill="none" stroke-linecap="round"/>';
         svg += foliage(f.x, f.y, f.r, i % 2 === 0 ? '#4a7c59' : '#3d6b47', '#16281a', '#b8dfa8');
       });
-      // dew
       svg += '<circle cx="' + (cx + 12) + '" cy="' + (groundY - 32) + '" r="1.3" fill="#d8efd8" opacity="0.8"/>';
 
     } else {
-      // FLOWERING — the showpiece
       var h4 = 116 + (growth - 95) * 2.2;
       var topY4 = groundY - h4;
       var trunkW4 = 7;
@@ -848,11 +819,11 @@
                ' L' + (cx + 1.8) + ' ' + topY4 + ' Q' + (cx + trunkW4/2 + 2.5) + ' ' + (groundY - h4/2) + ' ' + (cx + trunkW4/2 + 1.5) + ' ' + groundY + ' Z" fill="#3d2a1a"/>';
       svg += '<path d="M' + (cx - 1.2) + ' ' + (groundY - 6) + ' Q' + (cx - 2.4) + ' ' + (groundY - h4*0.5) + ' ' + (cx - 1) + ' ' + (topY4 + 5) + '" stroke="#8b6a44" stroke-width="1.2" fill="none" opacity="0.65"/>';
       svg += '<path d="M' + (cx + 1.2) + ' ' + (groundY - 6) + ' Q' + (cx + 1.8) + ' ' + (groundY - h4*0.55) + ' ' + (cx + 1) + ' ' + (topY4 + 10) + '" stroke="#1e1208" stroke-width="0.7" fill="none" opacity="0.5"/>';
-      // knots
+
       svg += '<ellipse cx="' + (cx - 0.8) + '" cy="' + (groundY - h4*0.3) + '" rx="1.4" ry="2.2" fill="#1e1208" opacity="0.6"/>';
       svg += '<ellipse cx="' + (cx + 1.2) + '" cy="' + (groundY - h4*0.58) + '" rx="1.2" ry="1.8" fill="#1e1208" opacity="0.55"/>';
       svg += '<ellipse cx="' + (cx - 0.6) + '" cy="' + (groundY - h4*0.78) + '" rx="1" ry="1.4" fill="#1e1208" opacity="0.5"/>';
-      // roots
+
       svg += '<path d="M' + (cx - trunkW4/2 - 1.5) + ' ' + groundY + ' Q' + (cx - trunkW4 - 3) + ' ' + (groundY - 2) + ' ' + (cx - trunkW4/2 - 1) + ' ' + (groundY - 6) + '" stroke="#3d2a1a" stroke-width="2.4" fill="none" stroke-linecap="round"/>';
       svg += '<path d="M' + (cx + trunkW4/2 + 1.5) + ' ' + groundY + ' Q' + (cx + trunkW4 + 3) + ' ' + (groundY - 2) + ' ' + (cx + trunkW4/2 + 1) + ' ' + (groundY - 6) + '" stroke="#3d2a1a" stroke-width="2.4" fill="none" stroke-linecap="round"/>';
 
@@ -898,7 +869,6 @@
       svg += '<path d="M' + (cx + 50) + ' ' + (groundY - 60) + ' q -3 -2 -5 -1 q 2 -3 5 -1 q 3 -2 5 1 q -2 3 -5 1z" fill="#f4c88a"/>';
       svg += '<path d="M' + (cx + 32) + ' ' + (groundY - 20) + ' q -2 -1.5 -3.5 -0.5 q 1.5 -2 3.5 -0.5 q 2 -1.5 3.5 0.5 q -1.5 2 -3.5 0.5z" fill="#e8b0c8"/>';
       svg += '</g>';
-      // fallen petals on ground
       svg += '<circle cx="' + (cx - 52) + '" cy="' + (groundY + 2) + '" r="1.6" fill="#e8b0c8" opacity="0.8"/>';
       svg += '<circle cx="' + (cx - 52) + '" cy="' + (groundY + 2) + '" r="0.6" fill="#ffe9a0"/>';
       svg += '<circle cx="' + (cx + 54) + '" cy="' + (groundY - 1) + '" r="1.4" fill="#e8b0c8" opacity="0.7"/>';
@@ -909,10 +879,6 @@
     svg += '</svg>';
     return svg;
   };
-
-  /* ------------------------------------------------------------
-     TREE — an ancient oak
-  ------------------------------------------------------------ */
   T.treeSVG = function (growth) {
     var t = Math.max(0, Math.min(1, growth / 100));
     var cx = 100, groundY = 182;
@@ -936,19 +902,17 @@
     svg += '<ellipse cx="0" cy="-2" rx="2.2" ry="1.2" fill="#9a4840"/>';
     svg += '</g>';
 
-    // trunk size scales with growth
     var trunkH = 60 + t * 60;
     var trunkW = 12 + t * 8;
     var topY = groundY - trunkH;
 
-    // gnarly trunk — irregular polygon path
     var trunkPath =
       'M' + (cx - trunkW/2) + ' ' + groundY +
       ' C' + (cx - trunkW/2 - 3) + ' ' + (groundY - trunkH*0.3) + ' ' + (cx - trunkW/2 + 2) + ' ' + (groundY - trunkH*0.55) + ' ' + (cx - 3) + ' ' + topY +
       ' L' + (cx + 3) + ' ' + topY +
       ' C' + (cx + trunkW/2 - 2) + ' ' + (groundY - trunkH*0.55) + ' ' + (cx + trunkW/2 + 3) + ' ' + (groundY - trunkH*0.3) + ' ' + (cx + trunkW/2) + ' ' + groundY + ' Z';
     svg += '<path d="' + trunkPath + '" fill="#3d2a1a"/>';
-    // trunk shading
+
     svg += '<path d="M' + (cx - trunkW/2) + ' ' + groundY + ' C' + (cx - trunkW/2 - 3) + ' ' + (groundY - trunkH*0.3) + ' ' + (cx - trunkW/2 + 2) + ' ' + (groundY - trunkH*0.55) + ' ' + (cx - 3) + ' ' + topY + '" stroke="#1e1208" stroke-width="0.8" fill="none" opacity="0.7"/>';
     svg += '<path d="M' + (cx + trunkW/2) + ' ' + groundY + ' C' + (cx + trunkW/2 + 3) + ' ' + (groundY - trunkH*0.3) + ' ' + (cx + trunkW/2 - 2) + ' ' + (groundY - trunkH*0.55) + ' ' + (cx + 3) + ' ' + topY + '" stroke="#8b6a44" stroke-width="0.9" fill="none" opacity="0.5"/>';
     // bark lines
@@ -958,7 +922,7 @@
       var j2 = Math.cos(i * 1.3) * 1.6;
       svg += '<path d="M' + bx + ' ' + (groundY - 4) + ' C' + (bx + j1) + ' ' + (groundY - trunkH*0.4) + ' ' + (bx + j2) + ' ' + (groundY - trunkH*0.7) + ' ' + (bx + j1*0.5) + ' ' + (topY + 3) + '" stroke="' + (i % 2 === 0 ? '#1e1208' : '#8b6a44') + '" stroke-width="' + (i % 2 === 0 ? 0.6 : 0.5) + '" fill="none" opacity="' + (i % 2 === 0 ? 0.6 : 0.45) + '"/>';
     }
-    // knots
+
     svg += '<ellipse cx="' + (cx - 1) + '" cy="' + (groundY - trunkH*0.28) + '" rx="2" ry="2.8" fill="#1e1208" opacity="0.7"/>';
     svg += '<ellipse cx="' + (cx - 1) + '" cy="' + (groundY - trunkH*0.28) + '" rx="1" ry="1.4" fill="#8b6a44" opacity="0.5"/>';
     svg += '<ellipse cx="' + (cx + 2) + '" cy="' + (groundY - trunkH*0.5) + '" rx="1.6" ry="2.2" fill="#1e1208" opacity="0.65"/>';
@@ -967,7 +931,6 @@
     svg += '<path d="M' + (cx - trunkW/2) + ' ' + groundY + ' C' + (cx - trunkW - 4) + ' ' + (groundY - 2) + ' ' + (cx - trunkW - 2) + ' ' + (groundY - 6) + ' ' + (cx - trunkW/2 - 1) + ' ' + (groundY - 8) + '" stroke="#3d2a1a" stroke-width="3" fill="none" stroke-linecap="round"/>';
     svg += '<path d="M' + (cx + trunkW/2) + ' ' + groundY + ' C' + (cx + trunkW + 4) + ' ' + (groundY - 2) + ' ' + (cx + trunkW + 2) + ' ' + (groundY - 6) + ' ' + (cx + trunkW/2 + 1) + ' ' + (groundY - 8) + '" stroke="#3d2a1a" stroke-width="3" fill="none" stroke-linecap="round"/>';
 
-    // main branches
     var branchBaseY = groundY - trunkH * 0.72;
     var mainBranches = [
       {x: cx - 40, y: branchBaseY - 6, w: trunkW*0.42, end: -22},
@@ -982,10 +945,8 @@
       // sub-branch
       svg += '<path d="M' + ((cx + b.x)/2) + ' ' + ((branchBaseY + b.y)/2) + ' Q' + (b.x - dir*6) + ' ' + (b.y - 8) + ' ' + (b.x - dir*10) + ' ' + (b.y - 14) + '" stroke="#3d2a1a" stroke-width="' + (b.w * 0.6) + '" fill="none" stroke-linecap="round"/>';
     });
-    // central leader
     svg += '<path d="M' + cx + ' ' + (branchBaseY - 10) + ' L' + cx + ' ' + (topY - 2) + '" stroke="#3d2a1a" stroke-width="' + (trunkW*0.36) + '" fill="none" stroke-linecap="round"/>';
 
-    // canopy — big oak clusters
     var canopyR = 22 + t * 30;
     var clusters = [
       {x: cx,                          y: topY - 4,                    r: canopyR * 0.95},
@@ -997,15 +958,12 @@
       {x: cx - canopyR * 0.9,          y: topY - 2,                    r: canopyR * 0.55},
       {x: cx + canopyR * 0.9,          y: topY - 4,                    r: canopyR * 0.55}
     ];
-    // back layer — darker, cheaper
     clusters.forEach(function (c) {
       svg += '<ellipse cx="' + c.x + '" cy="' + c.y + '" rx="' + (c.r * 1.05) + '" ry="' + (c.r * 0.95) + '" fill="#1e3422" opacity="0.85"/>';
     });
-    // mid layer — real foliage
     clusters.forEach(function (c, i) {
       svg += foliage(c.x, c.y, c.r * 0.95, i % 3 === 0 ? '#3d6b47' : '#4a7c59', '#0e1e15', '#7fa87f');
     });
-    // bright accents
     var accents = [
       {x: cx - canopyR * 0.5,  y: topY - canopyR * 0.5},
       {x: cx + canopyR * 0.4,  y: topY - canopyR * 0.3},
@@ -1016,7 +974,6 @@
       svg += foliage(a.x, a.y, canopyR * 0.35, '#7fa87f', '#3d6b47', '#b8dfa8');
     });
 
-    // falling leaves
     svg += '<g opacity="0.75">';
     svg += '<path d="M' + (cx - 60) + ' ' + (groundY - 45) + ' q -2 -1.5 -3.5 -0.5 q 1.5 -2 3.5 -0.5 q 2 -1.5 3.5 0.5 q -1.5 2 -3.5 0.5z" fill="#5f9d6a"/>';
     svg += '<path d="M' + (cx + 62) + ' ' + (groundY - 60) + ' q -2 -1.5 -3.5 -0.5 q 1.5 -2 3.5 -0.5 q 2 -1.5 3.5 0.5 q -1.5 2 -3.5 0.5z" fill="#7fa87f"/>';
@@ -1027,9 +984,6 @@
     return svg;
   };
 
-  /* ------------------------------------------------------------
-     WIDGETS
-  ------------------------------------------------------------ */
   T.refreshGardenWidget = function () {
     var p = Store.data.plant;
     var el = $('#wg-plant'); if (el) el.innerHTML = T.plantSVG(p.growth);
@@ -1147,7 +1101,6 @@
     }
   };
 
-  /* ---------- start menu ---------- */
   T.buildStart = function () {
     var menu = $('#start-menu'); if (!menu) return;
     var items = '';
@@ -1174,7 +1127,6 @@
     });
   };
 
-  /* ---------- stage ---------- */
   var STAGES = T.STAGES = [
     {key:'seed',      name:'seed',      th:0},
     {key:'sprout',    name:'sprout',    th:20},
@@ -1188,7 +1140,6 @@
     return s;
   };
 
-  /* ---------- app registry ---------- */
   T.apps = {};
   T.registerApp = function (id, def) { T.apps[id] = def; };
   T.launchApp = function (id) {
@@ -1197,7 +1148,6 @@
     try { a.launch(); } catch (e) { console.error('launch failed', id, e); T.toast('could not open ' + id, 'bad'); }
   };
 
-  /* ---------- boot ---------- */
   T.applyNaturalGrowth = function () {
     if (!Store.data || !Store.data.plant) return;
     var p = Store.data.plant;
