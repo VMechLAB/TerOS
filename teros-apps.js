@@ -1,15 +1,10 @@
-/* ============================================================
-   TerOS apps
-   ============================================================ */
 (function () {
   'use strict';
   var T = window.TerOS;
   var $ = T.$, $$ = T.$$, el = T.el, esc = T.esc, icon = T.icon;
   var WM = T.WM, Store = T.Store;
 
-  /* ------------------------------------------------------------
-     CALCULATOR
-  ------------------------------------------------------------ */
+ 
   T.registerApp('calc', {
     title: 'Calculator', icon: 'calc',
     launch: function () {
@@ -116,9 +111,7 @@
     }
   });
 
-  /* ------------------------------------------------------------
-     TERMINAL
-  ------------------------------------------------------------ */
+
   var HELP_LINES = [
     '  help            this message',
     '  clear           clear screen',
@@ -356,9 +349,6 @@
     }
   });
 
-  /* ------------------------------------------------------------
-     NOTES
-  ------------------------------------------------------------ */
   T.registerApp('notes', {
     title: 'Notes', icon: 'notes',
     launch: function () {
@@ -457,9 +447,6 @@
     }
   });
 
-  /* ------------------------------------------------------------
-     FILES
-  ------------------------------------------------------------ */
   T.registerApp('files', {
     title: 'Files', icon: 'files',
     launch: function () {
@@ -649,9 +636,6 @@
     }
   });
 
-  /* ------------------------------------------------------------
-     GARDEN
-  ------------------------------------------------------------ */
   T.registerApp('garden', {
     title: 'Garden', icon: 'plant',
     launch: function () {
@@ -707,9 +691,6 @@
     }
   });
 
-  /* ------------------------------------------------------------
-     TREE
-  ------------------------------------------------------------ */
   T.registerApp('tree', {
     title: 'Tree', icon: 'tree',
     launch: function () {
@@ -765,9 +746,6 @@
     }
   });
 
-  /* ------------------------------------------------------------
-     SETTINGS
-  ------------------------------------------------------------ */
   T.registerApp('settings', {
     title: 'Settings', icon: 'cog',
     launch: function () {
@@ -916,9 +894,6 @@
     }
   });
 
-  /* ------------------------------------------------------------
-     SYSTEM INFO
-  ------------------------------------------------------------ */
   T.registerApp('sysinfo', {
     title: 'System Info', icon: 'sysinfo',
     launch: function () {
@@ -969,9 +944,6 @@
     }
   });
 
-  /* ------------------------------------------------------------
-     DEVLOG
-  ------------------------------------------------------------ */
   var DEVLOG = [
     { ver: 'v0.1', date: 'week 1', title: 'the first window',
       body: 'Started with the shell: wallpaper, taskbar, one window manager, two programs. Calculator and terminal, deliberately small, so I could spend the time on the window system instead of the apps.',
