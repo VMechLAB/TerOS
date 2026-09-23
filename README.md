@@ -1,10 +1,8 @@
 # TerOS
 
-A little WebOS that lives in your browser. Forest greens, retro desktop vibes, and a plant that grows while you use it.
+A WebOS that lives in your browser. Forest greens, retro desktop vibes, and a plant that "grows" while you use it.
 
-I made this for the **Stardance challenge**. I wanted a browser OS that felt calm and nostalgic instead of another glassy clone of Windows. The name comes from the Greek idea of "other", like a small alternative world inside a tab.
-
-It's not a real operating system, just a simulated desktop with its own apps, files, terminal, and a garden.
+I made this for the **Stardance challenge**. I wanted a browser OS that felt calm and nostalgic instead of another glassy clone of Windows. The name comes from the Greek word for "other", like a small alternative world inside a tab. Sounds cool tho it is kinda useless still nice to use.
 
 ---
 
@@ -28,8 +26,6 @@ There are 10 apps: Calculator, Calendar, Terminal, Notes, Files, Garden, Tree, S
 - **Devlog** is the dev history of the project, from the early V0.1 builds up to V1.0. It covers how things changed along the way, not just a feature list.
 - **System Info** shows basic info about your TerOS setup.
 
-Files, notes, plant progress, settings, theme and wallpaper all save to `localStorage`, so everything is still there when you come back.
-
 ---
 
 ## Running it
@@ -40,7 +36,8 @@ It's three files:
 TerOS/
 ├── index.html
 ├── styles.css
-└── app.js
+├── teros-app.js
+└── teros-core.js
 ```
 
 No build step and no dependencies. Open `index.html` in your browser and you're done, or serve the folder with whatever you like:
@@ -50,6 +47,8 @@ python -m http.server
 ```
 
 It works fully offline too.
+
+## Or check it out at : https://vmechlab.github.io/TerOS/
 
 ---
 
@@ -74,7 +73,9 @@ Built with plain HTML, CSS and JavaScript. No frameworks, no backend, everything
 
 ## Roadmap
 
-**V1.0** is out. It has the desktop, window manager, core apps, fake filesystem, persistent storage, garden, themes and wallpapers.
+**V1.0** It has the desktop, window manager, core apps, fake filesystem, persistent storage, garden, themes and wallpapers.
+
+**V1.1** Just went back to the previous version that had that " retro feel " and not just AI lookalike.
 
 **V2.0** is coming for WebOS2 by Stardance. Planned so far:
 
@@ -82,8 +83,7 @@ Built with plain HTML, CSS and JavaScript. No frameworks, no backend, everything
 - Weather app
 - More garden stuff
 - More interactions
-- More hidden things
-- General polish
+- a " easter egg " that you will be able to find in it
 
 More ideas will probably show up as I go.
 
@@ -91,7 +91,7 @@ More ideas will probably show up as I go.
 
 ## About
 
-TerOS is a solo project. It started as "what if I made a nature-themed WebOS" and got way bigger than I planned, with a filesystem, a window manager and a bunch of apps.
+TerOS is a simple solo project. It started as " hmm 50 stardust. I want it" and ended up eating 20h+ of my like and will eat more I think.
 
 Hope you like my little creation. Muahahaha
 
