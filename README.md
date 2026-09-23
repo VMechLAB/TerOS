@@ -12,7 +12,7 @@ It's not a real operating system, just a simulated desktop with its own apps, fi
 
 | Desktop | Garden |
 |---|---|
-| ![TerOS desktop screenshot](./assets/screenshot-page.png) | ![TerOS garden screenshot](./assets/screenshot-garden.png) |
+| ![TerOS desktop screenshot](./assets/page.png) | ![TerOS garden screenshot](./assets/garden.png) |
 
 ---
 
